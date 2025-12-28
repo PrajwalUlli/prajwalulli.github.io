@@ -1,2 +1,0 @@
-# ulliprajwal.github.io
-Portfolio
