@@ -2,9 +2,12 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
         <title>PrajwalUlli</title>
-        <link rel="icon" type="image/png" href="assets/images/logo7.svg" />
+        <link rel="icon" type="image/png" href="assets/images/logoW.svg" />
 
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
@@ -43,33 +46,24 @@
             .block {
                 background-color: #0e0d0d;
                 border: 2px solid #181818;
-                border-radius: 12px;
+                border-radius: 18px;
             }
 
-            /* ---------- FIRST ROW ---------- */
+            /* ---------- GRID ---------- */
 
             .row:first-child {
                 height: 120px;
             }
 
-            .row:first-child .block {
-                height: 100%;
-            }
-
             .row:first-child .block:nth-child(1) {
                 width: 120px;
-                flex-shrink: 0;
             }
-
             .row:first-child .block:nth-child(2) {
                 width: 395px;
             }
-
             .row:first-child .block:nth-child(3) {
                 width: 375px;
             }
-
-            /* ---------- OTHER ROWS ---------- */
 
             .row:nth-child(2) .block:nth-child(1) {
                 width: 350px;
@@ -81,14 +75,15 @@
                 height: 130px;
             }
 
+            /* ⬇️ STATUS ROW (INCREASED HEIGHT) */
             .row:nth-child(3) .block:nth-child(1) {
                 width: 200px;
-                height: 220px;
+                height: 230px; /* tightened */
             }
 
             .row:nth-child(3) .block:nth-child(2) {
                 width: 690px;
-                height: 220px;
+                height: 230px; /* keep row aligned */
             }
 
             /* ---------- LOGO ---------- */
@@ -133,11 +128,12 @@
                 flex-direction: column;
             }
 
-            .skills-title {
+            .skills-title,
+            .socials-title {
                 font-size: 9px;
                 letter-spacing: 1.5px;
                 opacity: 0.5;
-                margin-bottom: 6px;
+                margin-bottom: 12px;
             }
 
             .skills-icons {
@@ -161,15 +157,6 @@
                 display: flex;
                 flex-direction: column;
             }
-
-            .socials-title {
-                font-size: 9px;
-                letter-spacing: 1.5px;
-                opacity: 0.5;
-                margin-bottom: 20px;
-            }
-
-            /* ---------- CUBE TEXT ---------- */
 
             .socials-name {
                 height: 24px;
@@ -208,8 +195,6 @@
                 transform: rotateX(90deg);
             }
 
-            /* ---------- ICONS ---------- */
-
             .socials-icons {
                 display: flex;
                 justify-content: center;
@@ -217,12 +202,10 @@
             }
 
             .social-icon {
-                position: relative;
                 width: 17px;
                 height: 17px;
+                position: relative;
                 cursor: pointer;
-                text-decoration: none;
-                display: block;
             }
 
             .social-icon img {
@@ -236,157 +219,101 @@
             .social-icon .hover {
                 opacity: 0;
             }
-
             .social-icon:hover .default {
                 opacity: 0;
             }
-
             .social-icon:hover .hover {
                 opacity: 1;
             }
 
-            /* ---------- MOBILE RESPONSIVE - BUSINESS CARD STYLE ---------- */
+            /* ---------- STATUS ---------- */
 
-            @media (max-width: 768px) {
-                body {
-                    background-color: #0a0a0a;
+            .status-block {
+                padding: 18px 16px;
+                color: white;
+            }
+
+            .status-title {
+                font-size: 9px;
+                letter-spacing: 1.5px;
+                opacity: 0.5;
+                margin-bottom: 12px;
+            }
+
+            .timeline {
+                position: relative;
+                padding-left: 18px;
+            }
+
+            /*.timeline::before {
+                content: "";
+                position: absolute;
+                left: 4px;
+                top: 2px;
+                bottom: 2px;
+                border-left: 2px dashed #2a2a2a;
+            }*/
+            .timeline-item::before {
+                content: "";
+                position: absolute;
+                left: -14px;
+                top: 14px;
+                height: calc(100% + 16px);
+                border-left: 2px dashed #2a2a2a;
+            }
+            .timeline-item:last-child::before {
+                display: none;
+            }
+
+            .timeline-item {
+                position: relative;
+                margin-bottom: 16px;
+                padding-left: 14px;
+            }
+
+            .timeline-item:last-child {
+                margin-bottom: 0;
+            }
+
+            .timeline-dot {
+                position: absolute;
+                left: -18px;
+                top: 3px;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: #2a2a2a;
+            }
+
+            .timeline-dot.active {
+                background: #ff3b3b;
+                animation: pulse 2s ease-out infinite;
+            }
+            @keyframes pulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.6);
                 }
-
-                .container {
-                    transform: rotate(90deg);
-                    width: 90vh;
-                    max-width: 90vh;
-                    gap: 8px;
+                70% {
+                    box-shadow: 0 0 0 6px rgba(255, 59, 59, 0);
                 }
-
-                .row {
-                    gap: 8px;
-                }
-
-                .block {
-                    border-radius: 8px;
-                    border-width: 1.5px;
-                }
-
-                /* First row */
-                .row:first-child {
-                    height: 11vh;
-                }
-
-                .row:first-child .block:nth-child(1) {
-                    width: 11vh;
-                }
-
-                .row:first-child .block:nth-child(2) {
-                    flex: 1;
-                }
-
-                .row:first-child .block:nth-child(3) {
-                    width: 34vh;
-                }
-
-                /* Second row */
-                .row:nth-child(2) .block:nth-child(1) {
-                    width: 32vh;
-                    height: 12vh;
-                }
-
-                .row:nth-child(2) .block:nth-child(2) {
-                    flex: 1;
-                    height: 12vh;
-                }
-
-                /* Third row */
-                .row:nth-child(3) .block:nth-child(1) {
-                    width: 18vh;
-                    height: 20vh;
-                }
-
-                .row:nth-child(3) .block:nth-child(2) {
-                    flex: 1;
-                    height: 20vh;
-                }
-
-                /* Content scaling */
-                .logo {
-                    width: 4.5vh;
-                }
-
-                .about-block {
-                    padding: 2vh;
-                    font-size: 1.1vh;
-                }
-
-                .about-text {
-                    line-height: 1.5;
-                    max-width: none;
-                }
-
-                .skills-block,
-                .socials-block {
-                    padding: 1.2vh 1.5vh;
-                }
-
-                .skills-title,
-                .socials-title {
-                    font-size: 0.8vh;
-                    letter-spacing: 1px;
-                    margin-bottom: 0.5vh;
-                }
-
-                .skills-icons {
-                    gap: 2.2vh;
-                }
-
-                .skills-icons img {
-                    width: 2vh;
-                }
-
-                .socials-name {
-                    height: 2.2vh;
-                    margin-bottom: 1.2vh;
-                    font-size: 1.15vh;
-                }
-
-                .cube {
-                    height: 2.2vh;
-                }
-
-                .cube-face.current {
-                    transform: rotateX(0deg) translateZ(1.1vh);
-                }
-
-                .cube-face.next {
-                    transform: rotateX(-90deg) translateZ(1.1vh);
-                }
-
-                .socials-icons {
-                    gap: 3vh;
-                }
-
-                .social-icon {
-                    width: 1.5vh;
-                    height: 1.5vh;
+                100% {
+                    box-shadow: 0 0 0 0 rgba(255, 59, 59, 0);
                 }
             }
 
-            @media (max-width: 480px) {
-                .container {
-                    width: 92vh;
-                    max-width: 92vh;
-                }
+            .timeline-title {
+                font-size: 10px;
+                margin-bottom: 1px;
+            }
 
-                .about-block {
-                    font-size: 1.15vh;
-                }
+            .timeline-sub {
+                font-size: 10px;
+                opacity: 0.6;
+            }
 
-                .skills-icons img {
-                    width: 2.1vh;
-                }
-
-                .socials-name {
-                    font-size: 1.2vh;
-                }
+            .timeline-year {
+                font-size: 9px;
+                opacity: 0.5;
             }
         </style>
     </head>
@@ -395,15 +322,13 @@
         <div class="container">
             <div class="row">
                 <div class="block logo-block">
-                    <img src="assets/images/logo7.svg" class="logo" />
+                    <img src="assets/images/logoW.svg" class="logo" />
                 </div>
 
                 <div class="block about-block">
                     <p class="about-text">
                         <span class="skill-text">Designer/WebDev</span> crafting
-                        beautiful, minimal and intuitive interfaces. I spend
-                        most of my time studying the human computer
-                        interactions.
+                        beautiful, minimal and intuitive interfaces.
                     </p>
                 </div>
 
@@ -450,7 +375,6 @@
                                 class="hover"
                             />
                         </div>
-
                         <div
                             class="social-icon"
                             data-text="dribbble.com/prajwal-ulli"
@@ -465,7 +389,6 @@
                                 class="hover"
                             />
                         </div>
-
                         <div
                             class="social-icon"
                             data-text="in/prajwalchandrashekharulli"
@@ -480,7 +403,6 @@
                                 class="hover"
                             />
                         </div>
-
                         <div
                             class="social-icon"
                             data-text="instagram.com/prajwalulli"
@@ -495,7 +417,6 @@
                                 class="hover"
                             />
                         </div>
-
                         <a
                             class="social-icon"
                             data-text="ulliprajwaledu@gmail.com"
@@ -517,7 +438,36 @@
             </div>
 
             <div class="row">
-                <div class="block"></div>
+                <div class="block status-block">
+                    <div class="status-title">STATUS</div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-title">
+                                Alard Public School
+                            </div>
+                            <div class="timeline-sub">Science Major</div>
+                            <div class="timeline-year">2021–22</div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-title">
+                                Ajeenkya D.Y. Patil University
+                            </div>
+                            <div class="timeline-sub">Bachelor in IT</div>
+                            <div class="timeline-year">2022–26</div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot active"></div>
+                            <div class="timeline-title">Ready to be hired!</div>
+                            <div class="timeline-year">2026</div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="block"></div>
             </div>
         </div>
@@ -559,7 +509,6 @@
                     queuedText = text;
                     return;
                 }
-
                 if (text === currentText) return;
 
                 isFlipping = true;
@@ -567,13 +516,13 @@
 
                 cube.classList.remove("flip");
                 void cube.offsetWidth;
-
                 cube.classList.add("flip");
 
                 clearTimeout(flipTimeout);
-                flipTimeout = setTimeout(() => {
-                    cleanupAfterFlip(text);
-                }, FLIP_DURATION + 50);
+                flipTimeout = setTimeout(
+                    () => cleanupAfterFlip(text),
+                    FLIP_DURATION + 50,
+                );
 
                 cube.addEventListener(
                     "transitionend",
@@ -586,14 +535,13 @@
             }
 
             document.querySelectorAll(".social-icon").forEach((icon) => {
-                icon.addEventListener("mouseenter", () => {
-                    flipTo(icon.dataset.text);
-                });
-
+                icon.addEventListener("mouseenter", () =>
+                    flipTo(icon.dataset.text),
+                );
                 if (icon.dataset.link) {
-                    icon.addEventListener("click", () => {
-                        window.open(icon.dataset.link, "_blank", "noopener");
-                    });
+                    icon.addEventListener("click", () =>
+                        window.open(icon.dataset.link, "_blank", "noopener"),
+                    );
                 }
             });
         </script>
