@@ -12,6 +12,9 @@
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
 
+            /* ---------------------------------------------------------
+               1. GLOBAL STYLES
+               --------------------------------------------------------- */
             * {
                 margin: 0;
                 padding: 0;
@@ -31,6 +34,9 @@
                 -moz-osx-font-smoothing: grayscale;
             }
 
+            /* ---------------------------------------------------------
+               2. LAYOUT GRID
+               --------------------------------------------------------- */
             .container {
                 width: 900px;
                 display: flex;
@@ -49,12 +55,10 @@
                 border-radius: 15px;
             }
 
-            /* ---------- GRID ---------- */
-
+            /* --- ROW 1 SIZING --- */
             .row:first-child {
                 height: 120px;
             }
-
             .row:first-child .block:nth-child(1) {
                 width: 120px;
             }
@@ -65,41 +69,41 @@
                 width: 375px;
             }
 
+            /* --- ROW 2 SIZING --- */
             .row:nth-child(2) .block:nth-child(1) {
                 width: 350px;
                 height: 130px;
             }
-
             .row:nth-child(2) .block:nth-child(2) {
                 width: 540px;
                 height: 130px;
             }
 
-            /* ⬇️ STATUS ROW (INCREASED HEIGHT) */
+            /* --- ROW 3 SIZING --- */
             .row:nth-child(3) .block:nth-child(1) {
                 width: 200px;
-                height: 230px; /* tightened */
+                height: 230px;
             }
-
             .row:nth-child(3) .block:nth-child(2) {
                 width: 690px;
-                height: 230px; /* keep row aligned */
+                height: 230px;
             }
 
-            /* ---------- LOGO ---------- */
+            /* ---------------------------------------------------------
+               3. COMPONENT STYLES
+               --------------------------------------------------------- */
 
+            /* LOGO */
             .logo-block {
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
-
             .logo {
                 width: 40px;
             }
 
-            /* ---------- ABOUT ---------- */
-
+            /* ABOUT */
             .about-block {
                 display: flex;
                 align-items: center;
@@ -109,18 +113,15 @@
                 font-size: 12px;
                 text-align: center;
             }
-
             .about-text {
                 max-width: 320px;
                 line-height: 1.6;
             }
-
-            .skill-text {
+            .highlight-text {
                 color: #f23b3b;
             }
 
-            /* ---------- SKILLS ---------- */
-
+            /* SKILLS */
             .skills-block {
                 padding: 12px 18px;
                 display: flex;
@@ -128,22 +129,34 @@
                 color: white;
                 overflow: hidden;
             }
-
             .skills-title {
                 font-size: 9px;
                 letter-spacing: 1.5px;
                 opacity: 0.5;
                 margin-bottom: 12px;
             }
-
             .skills-marquee {
                 position: relative;
                 flex: 1;
                 display: flex;
                 align-items: center;
                 overflow: hidden;
+                /* Mask edges for smooth fade */
+                mask-image: linear-gradient(
+                    to right,
+                    transparent,
+                    black 10%,
+                    black 90%,
+                    transparent
+                );
+                -webkit-mask-image: linear-gradient(
+                    to right,
+                    transparent,
+                    black 10%,
+                    black 90%,
+                    transparent
+                );
             }
-
             .skills-track {
                 display: flex;
                 align-items: center;
@@ -151,50 +164,25 @@
                 width: max-content;
                 will-change: transform;
             }
-
             .skills-track img {
                 width: 23px;
                 opacity: 0.75;
                 flex-shrink: 0;
             }
 
-            .skills-marquee::before,
-            .skills-marquee::after {
-                content: "";
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                width: 24px;
-                pointer-events: none;
-                z-index: 2;
-            }
-
-            .skills-marquee::before {
-                left: 0;
-                background: linear-gradient(to right, #0e0d0d, transparent);
-            }
-
-            .skills-marquee::after {
-                right: 0;
-                background: linear-gradient(to left, #0e0d0d, transparent);
-            }
-
-            /* ---------- SOCIALS ---------- */
-
+            /* SOCIALS */
             .socials-block {
                 padding: 14px 18px;
                 color: white;
                 display: flex;
                 flex-direction: column;
             }
-
             .socials-title {
                 font-size: 9px;
                 letter-spacing: 1.5px;
                 opacity: 0.5;
                 margin-bottom: 12px;
             }
-
             .socials-name {
                 height: 24px;
                 margin-bottom: 14px;
@@ -203,13 +191,12 @@
                 font-size: 13px;
                 text-align: center;
             }
-
+            /* 3D Cube Animation */
             .cube {
                 position: relative;
                 height: 24px;
                 transform-style: preserve-3d;
             }
-
             .cube-face {
                 position: absolute;
                 inset: 0;
@@ -218,42 +205,36 @@
                 justify-content: center;
                 backface-visibility: hidden;
             }
-
             .cube-face.current {
                 transform: rotateX(0deg) translateZ(12px);
             }
-
             .cube-face.next {
                 transform: rotateX(-90deg) translateZ(12px);
             }
-
             .cube.flip {
                 transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
                 transform: rotateX(90deg);
             }
-
+            /* Social Icons */
             .socials-icons {
                 display: flex;
                 justify-content: center;
                 gap: 35px;
             }
-
             .social-icon {
                 width: 17px;
                 height: 17px;
                 position: relative;
                 cursor: pointer;
             }
-
             .social-icon img {
+                opacity: 0.5;
                 position: absolute;
                 inset: 0;
                 width: 100%;
                 height: 100%;
                 transition: opacity 0.25s ease;
-                opacity: 0.5;
             }
-
             .social-icon .hover {
                 opacity: 0;
             }
@@ -264,8 +245,7 @@
                 opacity: 1;
             }
 
-            /* ---------- PROJECTS ---------- */
-
+            /* PROJECTS */
             .projects-block {
                 padding: 14px 16px;
                 color: white;
@@ -273,108 +253,88 @@
                 flex-direction: column;
                 overflow: hidden;
             }
-
             .projects-title {
                 font-size: 9px;
                 letter-spacing: 1.5px;
                 opacity: 0.5;
                 margin-bottom: 12px;
             }
-
             .projects-grid {
                 display: flex;
                 gap: 10px;
                 flex: 1;
             }
-
             .project-card {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
-
+                justify-content: flex-start;
                 background: #0b0b0b;
                 border: 1px solid #1e1e1e;
                 border-radius: 12px;
-                padding: 8px;
-
+                border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+                padding: 15px;
+                padding-top: 8px;
                 text-decoration: none;
                 color: white;
-
                 min-height: 0;
-
-                /*transform: rotateZ(1.5deg);*/
+                gap: 1px;
+                transform: rotateZ(5deg);
                 transition:
                     background 0.25s ease,
                     border-color 0.25s ease,
                     transform 0.25s ease;
             }
-
-            /*.project-card:nth-child(2) {
-                transform: rotateZ(0.5deg);
-            }
-
-            .project-card:nth-child(3) {
-                transform: rotateZ(2.2deg);
-            }*/
-
             .project-card:hover {
                 background: #101010;
                 border-color: #2a2a2a;
-                transform: translateY(-2px);
+                transform: rotateZ(0deg) scale(0.9);
             }
-
             .project-name {
                 font-size: 12px;
                 margin-bottom: 2px;
             }
-
             .project-tag {
                 font-size: 9px;
                 opacity: 0.6;
                 margin-bottom: 3px;
             }
-
             .project-tag span {
+                line-height: 1;
                 display: inline-block;
-                padding: 2px 4px;
+                padding: 2px 1px;
                 background: transparent;
                 color: #bcbcbc;
                 transition:
                     background 0.15s ease,
                     color 0.15s ease;
             }
-
             .project-card:hover .project-tag span {
                 background: #bcbcbc;
                 color: #0a0a0a;
             }
-
             .project-desc {
                 font-size: 9px;
                 line-height: 1.4;
                 opacity: 0.75;
             }
 
-            /* ---------- STATUS ---------- */
-
+            /* STATUS */
             .status-block {
                 padding: 18px 16px;
                 color: white;
             }
-
             .status-title {
                 font-size: 9px;
                 letter-spacing: 1.5px;
                 opacity: 0.5;
                 margin-bottom: 12px;
             }
-
             .timeline {
                 position: relative;
                 padding-left: 18px;
             }
-
             .timeline-item::before {
                 content: "";
                 position: absolute;
@@ -386,17 +346,14 @@
             .timeline-item:last-child::before {
                 display: none;
             }
-
             .timeline-item {
                 position: relative;
                 margin-bottom: 16px;
                 padding-left: 14px;
             }
-
             .timeline-item:last-child {
                 margin-bottom: 0;
             }
-
             .timeline-dot {
                 position: absolute;
                 left: -18px;
@@ -406,7 +363,6 @@
                 border-radius: 50%;
                 background: #2a2a2a;
             }
-
             .timeline-dot.active {
                 background: #ff3b3b;
                 animation: pulse 2s ease-out infinite;
@@ -422,17 +378,14 @@
                     box-shadow: 0 0 0 0 rgba(255, 59, 59, 0);
                 }
             }
-
             .timeline-title {
                 font-size: 10px;
                 margin-bottom: 1px;
             }
-
             .timeline-sub {
                 font-size: 10px;
                 opacity: 0.6;
             }
-
             .timeline-year {
                 font-size: 9px;
                 opacity: 0.5;
@@ -449,8 +402,12 @@
 
                 <div class="block about-block">
                     <p class="about-text">
-                        <span class="skill-text">Designer/WebDev</span> crafting
-                        beautiful, minimal and intuitive interfaces.
+                        <span class="highlight-text">Designer/WebDev</span>
+                        crafting beautiful, minimal and intuitive interfaces.
+                        Backed by a hobbyist’s passion for
+                        <span class="highlight-text"
+                            >hardware & electronics</span
+                        >.
                     </p>
                 </div>
 
@@ -459,9 +416,8 @@
                     <div class="skills-marquee">
                         <div class="skills-track" id="skillsTrack">
                             <img src="assets/images/python.svg" />
-                            <img src="assets/images/c.svg" />
+                            <img src="assets/images/C.svg" />
                             <img src="assets/images/js.svg" />
-                            <!--<img src="assets/images/html.svg" />-->
                             <img src="assets/images/sql.svg" />
                             <img src="assets/images/nestjs.svg" />
                             <img src="assets/images/git.svg" />
@@ -647,8 +603,11 @@
         </div>
 
         <script>
+            // --- CONFIGURATION ---
             const defaultText = "Prajwal Chandrashekhar Ulli";
+            const FLIP_DURATION = 450;
 
+            // --- SOCIAL CUBE TEXT FLIP ---
             const cube = document.querySelector(".cube");
             const currentEl = document.getElementById("textCurrent");
             const nextEl = document.getElementById("textNext");
@@ -657,8 +616,6 @@
             let isFlipping = false;
             let queuedText = null;
             let flipTimeout = null;
-
-            const FLIP_DURATION = 450;
 
             currentEl.textContent = defaultText;
 
@@ -719,23 +676,40 @@
                 }
             });
 
-            /* ---------- SKILLS MARQUEE (SMOOTH LOOP) ---------- */
+            window.addEventListener("load", () => {
+                const track = document.getElementById("skillsTrack");
+                const originalCount = track.children.length;
 
-            const track = document.getElementById("skillsTrack");
-            let offset = 0;
-            const speed = 0.35;
+                // 1. Duplicate content enough times to ensure smooth loop
+                const originalContent = track.innerHTML;
+                track.innerHTML =
+                    originalContent +
+                    originalContent +
+                    originalContent +
+                    originalContent;
 
-            track.innerHTML += track.innerHTML;
-            const loopWidth = track.scrollWidth / 2;
+                // 2. Find the FIRST item of the SECOND set
+                // The distance from the very start (0) to this element is our loop distance
+                const firstClone = track.children[originalCount];
+                const loopWidth = firstClone.offsetLeft;
 
-            function animateMarquee() {
-                offset += speed;
-                if (offset >= loopWidth) offset = 0;
-                track.style.transform = `translateX(-${offset}px)`;
-                requestAnimationFrame(animateMarquee);
-            }
+                let offset = 0;
+                const speed = 0.5; // Slightly faster for smoother appearance
 
-            animateMarquee();
+                function animateMarquee() {
+                    offset += speed;
+
+                    // Reset when we reach the exact start of the second set
+                    if (offset >= loopWidth) {
+                        offset = 0;
+                    }
+
+                    track.style.transform = `translateX(-${offset}px)`;
+                    requestAnimationFrame(animateMarquee);
+                }
+
+                animateMarquee();
+            });
         </script>
     </body>
 </html>
