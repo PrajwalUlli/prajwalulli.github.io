@@ -35,18 +35,18 @@
                 width: 900px;
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
+                gap: 9px;
             }
 
             .row {
                 display: flex;
-                gap: 10px;
+                gap: 9px;
             }
 
             .block {
                 background-color: #0e0d0d;
                 border: 2px solid #181818;
-                border-radius: 18px;
+                border-radius: 15px;
             }
 
             /* ---------- GRID ---------- */
@@ -123,30 +123,60 @@
 
             .skills-block {
                 padding: 12px 18px;
-                color: white;
                 display: flex;
                 flex-direction: column;
+                color: white;
+                overflow: hidden;
             }
 
-            .skills-title,
-            .socials-title {
+            .skills-title {
                 font-size: 9px;
                 letter-spacing: 1.5px;
                 opacity: 0.5;
                 margin-bottom: 12px;
             }
 
-            .skills-icons {
+            .skills-marquee {
+                position: relative;
                 flex: 1;
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                gap: 25px;
+                overflow: hidden;
             }
 
-            .skills-icons img {
+            .skills-track {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                width: max-content;
+                will-change: transform;
+            }
+
+            .skills-track img {
                 width: 23px;
                 opacity: 0.75;
+                flex-shrink: 0;
+            }
+
+            .skills-marquee::before,
+            .skills-marquee::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 24px;
+                pointer-events: none;
+                z-index: 2;
+            }
+
+            .skills-marquee::before {
+                left: 0;
+                background: linear-gradient(to right, #0e0d0d, transparent);
+            }
+
+            .skills-marquee::after {
+                right: 0;
+                background: linear-gradient(to left, #0e0d0d, transparent);
             }
 
             /* ---------- SOCIALS ---------- */
@@ -156,6 +186,13 @@
                 color: white;
                 display: flex;
                 flex-direction: column;
+            }
+
+            .socials-title {
+                font-size: 9px;
+                letter-spacing: 1.5px;
+                opacity: 0.5;
+                margin-bottom: 12px;
             }
 
             .socials-name {
@@ -224,6 +261,98 @@
             }
             .social-icon:hover .hover {
                 opacity: 1;
+            }
+
+            /* ---------- PROJECTS ---------- */
+
+            .projects-block {
+                padding: 14px 16px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .projects-title {
+                font-size: 9px;
+                letter-spacing: 1.5px;
+                opacity: 0.5;
+                margin-bottom: 12px;
+            }
+
+            .projects-grid {
+                display: flex;
+                gap: 10px;
+                flex: 1;
+            }
+
+            .project-card {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                background: #0b0b0b;
+                border: 1px solid #1e1e1e;
+                border-radius: 12px;
+                padding: 8px;
+
+                text-decoration: none;
+                color: white;
+
+                min-height: 0;
+
+                /*transform: rotateZ(1.5deg);*/
+                transition:
+                    background 0.25s ease,
+                    border-color 0.25s ease,
+                    transform 0.25s ease;
+            }
+
+            /*.project-card:nth-child(2) {
+                transform: rotateZ(0.5deg);
+            }
+
+            .project-card:nth-child(3) {
+                transform: rotateZ(2.2deg);
+            }*/
+
+            .project-card:hover {
+                background: #101010;
+                border-color: #2a2a2a;
+                transform: translateY(-2px);
+            }
+
+            .project-name {
+                font-size: 12px;
+                margin-bottom: 2px;
+            }
+
+            .project-tag {
+                font-size: 9px;
+                opacity: 0.6;
+                margin-bottom: 3px;
+            }
+
+            .project-tag span {
+                display: inline-block;
+                padding: 2px 4px;
+                background: transparent;
+                color: #bcbcbc;
+                transition:
+                    background 0.15s ease,
+                    color 0.15s ease;
+            }
+
+            .project-card:hover .project-tag span {
+                background: #bcbcbc;
+                color: #0a0a0a;
+            }
+
+            .project-desc {
+                font-size: 9px;
+                line-height: 1.4;
+                opacity: 0.75;
             }
 
             /* ---------- STATUS ---------- */
@@ -326,14 +455,18 @@
 
                 <div class="block skills-block">
                     <div class="skills-title">SKILLS</div>
-                    <div class="skills-icons">
-                        <img src="assets/images/linux.svg" />
-                        <img src="assets/images/js.svg" />
-                        <img src="assets/images/nestjs.svg" />
-                        <img src="assets/images/python.svg" />
-                        <img src="assets/images/html.svg" />
-                        <img src="assets/images/sql.svg" />
-                        <img src="assets/images/git.svg" />
+                    <div class="skills-marquee">
+                        <div class="skills-track" id="skillsTrack">
+                            <img src="assets/images/python.svg" />
+                            <img src="assets/images/c.svg" />
+                            <img src="assets/images/js.svg" />
+                            <!--<img src="assets/images/html.svg" />-->
+                            <img src="assets/images/sql.svg" />
+                            <img src="assets/images/nestjs.svg" />
+                            <img src="assets/images/git.svg" />
+                            <img src="assets/images/iot.svg" />
+                            <img src="assets/images/linux.svg" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -426,7 +559,55 @@
                     </div>
                 </div>
 
-                <div class="block"></div>
+                <div class="block projects-block">
+                    <div class="projects-title">PROJECTS</div>
+
+                    <div class="projects-grid">
+                        <a
+                            class="project-card"
+                            href="https://github.com/PrajwalUlli/LiFi"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="project-name">Light Fidelity</div>
+                            <div class="project-tag">
+                                <span>Prototype</span>
+                            </div>
+                            <div class="project-desc">
+                                Light based communication using LEDs and
+                                photodiodes
+                            </div>
+                        </a>
+
+                        <a
+                            class="project-card"
+                            href="https://ulliprajwal.softwaremonkeys.in/En.crypt/"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="project-name">En.crypt</div>
+                            <div class="project-tag"><span>Website</span></div>
+                            <div class="project-desc">
+                                Text encryption tools with clean UI
+                            </div>
+                        </a>
+
+                        <a
+                            class="project-card"
+                            href="https://github.com/prajwalulli/extension-manager"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <div class="project-name">Extension Manager</div>
+                            <div class="project-tag">
+                                <span>Browser Extension</span>
+                            </div>
+                            <div class="project-desc">
+                                Manage and toggle browser extensions efficiently
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
@@ -536,6 +717,24 @@
                     );
                 }
             });
+
+            /* ---------- SKILLS MARQUEE (SMOOTH LOOP) ---------- */
+
+            const track = document.getElementById("skillsTrack");
+            let offset = 0;
+            const speed = 0.35;
+
+            track.innerHTML += track.innerHTML;
+            const loopWidth = track.scrollWidth / 2;
+
+            function animateMarquee() {
+                offset += speed;
+                if (offset >= loopWidth) offset = 0;
+                track.style.transform = `translateX(-${offset}px)`;
+                requestAnimationFrame(animateMarquee);
+            }
+
+            animateMarquee();
         </script>
     </body>
 </html>
