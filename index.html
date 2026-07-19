@@ -6,17 +6,15 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        <meta name="color-scheme" content="dark only">
-        <meta name="darkreader-lock">
+        <meta name="color-scheme" content="dark only" />
+        <meta name="darkreader-lock" />
         <title>PrajwalUlli</title>
         <link rel="icon" type="image/png" href="assets/images/logo.svg" />
+        <base target="_blank" />
 
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
 
-            /* ---------------------------------------------------------
-               1. GLOBAL STYLES
-               --------------------------------------------------------- */
             * {
                 margin: 0;
                 padding: 0;
@@ -40,14 +38,12 @@
                 -moz-osx-font-smoothing: grayscale;
             }
 
-            /* ---------------------------------------------------------
-               2. LAYOUT GRID
-               --------------------------------------------------------- */
             .container {
                 width: 900px;
                 display: flex;
                 flex-direction: column;
                 gap: 9px;
+                position: relative;
             }
 
             .row {
@@ -56,12 +52,11 @@
             }
 
             .block {
-                background-color: #0A0A0A; /*0B0B0B  0e0d0d*/
-                border: 1px solid #0F0F0F; /*111010  181818*/
+                background-color: #0a0a0a;
+                border: 1px solid #0f0f0f;
                 border-radius: 15px;
             }
 
-            /* --- ROW 1 SIZING --- */
             .row:first-child {
                 height: 120px;
             }
@@ -75,7 +70,6 @@
                 width: 375px;
             }
 
-            /* --- ROW 2 SIZING --- */
             .row:nth-child(2) .block:nth-child(1) {
                 width: 350px;
                 height: 130px;
@@ -85,7 +79,6 @@
                 height: 130px;
             }
 
-            /* --- ROW 3 SIZING --- */
             .row:nth-child(3) .block:nth-child(1) {
                 width: 200px;
                 height: 230px;
@@ -95,11 +88,6 @@
                 height: 230px;
             }
 
-            /* ---------------------------------------------------------
-               3. COMPONENT STYLES
-               --------------------------------------------------------- */
-
-            /* LOGO */
             .logo-block {
                 display: flex;
                 align-items: center;
@@ -109,7 +97,6 @@
                 width: 70px;
             }
 
-            /* ABOUT */
             .about-block {
                 display: flex;
                 align-items: center;
@@ -127,7 +114,6 @@
                 color: #f23b3b;
             }
 
-            /* SKILLS */
             .skills-block {
                 padding: 12px 18px;
                 display: flex;
@@ -147,7 +133,6 @@
                 display: flex;
                 align-items: center;
                 overflow: hidden;
-                /* Mask edges for smooth fade */
                 mask-image: linear-gradient(
                     to right,
                     transparent,
@@ -176,7 +161,6 @@
                 flex-shrink: 0;
             }
 
-            /* SOCIALS */
             .socials-block {
                 padding: 14px 18px;
                 color: white;
@@ -197,7 +181,6 @@
                 font-size: 13px;
                 text-align: center;
             }
-            /* 3D Cube Animation */
             .cube {
                 position: relative;
                 height: 24px;
@@ -221,7 +204,6 @@
                 transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
                 transform: rotateX(90deg);
             }
-            /* Social Icons */
             .socials-icons {
                 display: flex;
                 justify-content: center;
@@ -251,7 +233,6 @@
                 opacity: 1;
             }
 
-            /* PROJECTS */
             .projects-block {
                 padding: 14px 16px;
                 color: white;
@@ -326,7 +307,6 @@
                 opacity: 0.75;
             }
 
-            /* STATUS */
             .status-block {
                 padding: 18px 16px;
                 color: white;
@@ -397,40 +377,112 @@
                 opacity: 0.5;
             }
 
-            /* ---------------------------------------------------------
-                           MOBILE VIEW LOGIC
-            --------------------------------------------------------- */
+            /* =========================================================
+   CHAT BLOCK
+   ========================================================= */
+            .chat-block {
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition:
+                    top 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                    left 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                    width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                    height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                    border-radius 0.5s ease;
+            }
+
+            .chat-block.expanded {
+                justify-content: flex-start;
+                align-items: stretch;
+                border-radius: 15px;
+            }
+
+            /* Dither Canvas */
+            .dither-canvas {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                opacity: 0.03;
+                z-index: 0;
+                border-radius: 15px;
+            }
+            .chat-block.expanded .dither-canvas {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .join-chat-btn {
+                position: relative;
+                z-index: 1;
+                background-color: #2a2a2a00;
+                color: #606060;
+                border: none;
+                padding: 14px 36px;
+                border-radius: 1em;
+                cursor: pointer;
+                font-family: "Space Mono", monospace;
+                font-weight: 700;
+                font-size: 12px;
+                letter-spacing: 1.5px;
+            }
+            .join-chat-btn:hover {
+                color: #ededed;
+            }
+
+            /* Iframe — hidden until loaded */
+            .chat-iframe {
+                display: none;
+                width: 100%;
+                height: 100%;
+                border: none;
+                border-radius: 15px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                position: relative;
+                z-index: 1;
+            }
+            .chat-block.expanded .chat-iframe {
+                display: block;
+            }
+            .chat-iframe.loaded {
+                opacity: 1;
+            }
+            .chat-block.expanded .join-chat-btn {
+                display: none;
+            }
+
             @media screen and (max-width: 900px) {
                 body {
-                    /* Lock scroll on body so we only see the rotated element */
                     overflow: hidden;
                     position: fixed;
                     width: 100%;
                     height: 100%;
                 }
-
                 .container {
                     position: absolute;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%) rotate(90deg) scale(0.7);
-
-                    /* Optional: Add a shadow to separate from bg */
                     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
                 }
             }
-
-            /* Slight adjustment for very small phones */
             @media screen and (max-width: 380px) {
                 .container {
                     transform: translate(-50%, -50%) rotate(90deg) scale(0.6);
                 }
             }
         </style>
+        <base target="_blank" />
     </head>
 
     <body>
-        <div class="container">
+        <div class="container" id="container">
             <div class="row">
                 <div class="block logo-block">
                     <img src="assets/images/logo-vhs2.gif" class="logo" />
@@ -440,7 +492,7 @@
                     <p class="about-text">
                         <span class="highlight-text">Designer/WebDev</span>
                         crafting beautiful, minimal and intuitive interfaces.
-                        Backed by a hobbyist’s passion for
+                        Backed by a hobbyist's passion for
                         <span class="highlight-text"
                             >hardware & electronics</span
                         >.
@@ -467,7 +519,6 @@
             <div class="row">
                 <div class="block socials-block">
                     <div class="socials-title">SOCIALS</div>
-
                     <div class="socials-name">
                         <div class="cube">
                             <span
@@ -477,7 +528,6 @@
                             <span class="cube-face next" id="textNext"></span>
                         </div>
                     </div>
-
                     <div class="socials-icons">
                         <div
                             class="social-icon"
@@ -554,7 +604,6 @@
 
                 <div class="block projects-block">
                     <div class="projects-title">PROJECTS</div>
-
                     <div class="projects-grid">
                         <a
                             class="project-card"
@@ -571,7 +620,6 @@
                                 photodiodes
                             </div>
                         </a>
-
                         <a
                             class="project-card"
                             href="https://ulliprajwal.softwaremonkeys.in/En.crypt/"
@@ -584,7 +632,6 @@
                                 Text encryption tools with clean UI
                             </div>
                         </a>
-
                         <a
                             class="project-card"
                             href="https://github.com/BalaKrishnaS7/ExtensionWatcher"
@@ -606,7 +653,6 @@
             <div class="row">
                 <div class="block status-block">
                     <div class="status-title">STATUS</div>
-
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
@@ -616,7 +662,6 @@
                             <div class="timeline-sub">Science Major</div>
                             <div class="timeline-year">2021–22</div>
                         </div>
-
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
                             <div class="timeline-title">
@@ -625,7 +670,6 @@
                             <div class="timeline-sub">Bachelor in IT</div>
                             <div class="timeline-year">2022–26</div>
                         </div>
-
                         <div class="timeline-item">
                             <div class="timeline-dot active"></div>
                             <div class="timeline-title">Ready to be hired!</div>
@@ -634,26 +678,174 @@
                     </div>
                 </div>
 
-                <div class="block"></div>
+                <div class="block chat-block" id="chatBlock">
+                    <canvas class="dither-canvas" id="ditherCanvas"></canvas>
+                    <button class="join-chat-btn" id="joinChatBtn">
+                        Join Chat
+                    </button>
+                    <iframe class="chat-iframe" id="chatIframe" src=""></iframe>
+                </div>
             </div>
         </div>
 
         <script>
-            // --- CONFIGURATION ---
-            const defaultText = "Prajwal Chandrashekhar Ulli";
-            const FLIP_DURATION = 450;
+            /* =========================================================
+               CONFIGURATION
+               ========================================================= */
+            const CONFIG = {
+                defaultText: "Prajwal Chandrashekhar Ulli",
+                flipDuration: 450,
+                marqueeSpeed: 0.5,
+                chatUrl: "http://something/",
+            };
 
-            // --- SOCIAL CUBE TEXT FLIP ---
+            /* =========================================================
+               DITHER CANVAS — Sparse Multi-Ripple with Noise Patches
+               ========================================================= */
+            const Dither = (() => {
+                const canvas = document.getElementById("ditherCanvas");
+                if (!canvas) return { init: () => {}, stop: () => {} };
+                const ctx = canvas.getContext("2d");
+                const chatBlock = document.getElementById("chatBlock");
+
+                const BAYER = [
+                    [0, 8, 2, 10],
+                    [12, 4, 14, 6],
+                    [3, 11, 1, 9],
+                    [15, 7, 13, 5],
+                ];
+
+                const RIPPLE_COUNT = 6;
+                const CELL = 5;
+                let ripples = [];
+                let time = 0;
+                let animId = null;
+                let w = 0,
+                    h = 0;
+
+                function noise(x, y, t) {
+                    const s1 =
+                        Math.sin(x * 0.03 + t * 0.01) *
+                        Math.cos(y * 0.03 - t * 0.008);
+                    const s2 =
+                        Math.sin(x * 0.07 - t * 0.015) *
+                        Math.cos(y * 0.05 + t * 0.012);
+                    const s3 = Math.sin(x * 0.13 + y * 0.11 + t * 0.02);
+                    return (s1 + s2 * 0.5 + s3 * 0.25) / 1.75;
+                }
+
+                function spawnRipples() {
+                    ripples = [];
+                    for (let i = 0; i < RIPPLE_COUNT; i++) {
+                        ripples.push({
+                            x: Math.random(),
+                            y: Math.random(),
+                            freq: 3 + Math.random() * 5,
+                            speed: 0.012 + Math.random() * 0.02,
+                            phase: Math.random() * Math.PI * 2,
+                            amp: 0.4 + Math.random() * 0.5,
+                            radius: 0.5 + Math.random() * 0.4,
+                        });
+                    }
+                }
+
+                function resize() {
+                    const rect = chatBlock.getBoundingClientRect();
+                    const dpr = window.devicePixelRatio || 1;
+                    canvas.width = rect.width * dpr;
+                    canvas.height = rect.height * dpr;
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                    w = rect.width;
+                    h = rect.height;
+                }
+
+                function draw() {
+                    const cols = Math.ceil(w / CELL);
+                    const rows = Math.ceil(h / CELL);
+
+                    ctx.clearRect(0, 0, w, h);
+
+                    for (let y = 0; y < rows; y++) {
+                        for (let x = 0; x < cols; x++) {
+                            const px = x * CELL;
+                            const py = y * CELL;
+
+                            const n = noise(px, py, time);
+                            if (n < -0.15) continue;
+
+                            let waveSum = 0;
+                            let totalWeight = 0;
+
+                            for (const r of ripples) {
+                                const rx = r.x * w;
+                                const ry = r.y * h;
+                                const dx = (px - rx) / w;
+                                const dy = (py - ry) / h;
+                                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                                const falloff = Math.max(
+                                    0,
+                                    1 - dist / r.radius,
+                                );
+                                if (falloff <= 0) continue;
+
+                                const wave =
+                                    Math.sin(
+                                        dist * r.freq * 10 -
+                                            time * r.speed +
+                                            r.phase,
+                                    ) * r.amp;
+                                waveSum += wave * falloff * falloff;
+                                totalWeight += falloff;
+                            }
+
+                            if (totalWeight < 0.05) continue;
+
+                            const avgWave = waveSum / (totalWeight + 0.1);
+                            const patchiness = (n + 1) * 0.5;
+                            const threshold =
+                                (avgWave * 0.7 + patchiness * 0.3) * 16;
+
+                            const bayerVal = BAYER[y % 4][x % 4];
+                            if (bayerVal < threshold) {
+                                ctx.fillStyle = "#ffffff";
+                                ctx.fillRect(px, py, CELL, CELL);
+                            }
+                        }
+                    }
+
+                    time++;
+                    animId = requestAnimationFrame(draw);
+                }
+
+                function init() {
+                    resize();
+                    spawnRipples();
+                    draw();
+                    window.addEventListener("resize", resize);
+                }
+
+                function stop() {
+                    if (animId) cancelAnimationFrame(animId);
+                    animId = null;
+                }
+
+                return { init, stop };
+            })();
+
+            /* =========================================================
+               SOCIAL CUBE TEXT FLIP
+               ========================================================= */
             const cube = document.querySelector(".cube");
             const currentEl = document.getElementById("textCurrent");
             const nextEl = document.getElementById("textNext");
 
-            let currentText = defaultText;
+            let currentText = CONFIG.defaultText;
             let isFlipping = false;
             let queuedText = null;
             let flipTimeout = null;
 
-            currentEl.textContent = defaultText;
+            currentEl.textContent = CONFIG.defaultText;
 
             function cleanupAfterFlip(text) {
                 cube.classList.remove("flip");
@@ -688,7 +880,7 @@
                 clearTimeout(flipTimeout);
                 flipTimeout = setTimeout(
                     () => cleanupAfterFlip(text),
-                    FLIP_DURATION + 50,
+                    CONFIG.flipDuration + 50,
                 );
 
                 cube.addEventListener(
@@ -712,39 +904,129 @@
                 }
             });
 
+            /* =========================================================
+               SKILLS MARQUEE
+               ========================================================= */
             window.addEventListener("load", () => {
                 const track = document.getElementById("skillsTrack");
                 const originalCount = track.children.length;
-
-                // 1. Duplicate content enough times to ensure smooth loop
                 const originalContent = track.innerHTML;
+
                 track.innerHTML =
                     originalContent +
                     originalContent +
                     originalContent +
                     originalContent;
 
-                // 2. Find the FIRST item of the SECOND set
-                // The distance from the very start (0) to this element is our loop distance
                 const firstClone = track.children[originalCount];
                 const loopWidth = firstClone.offsetLeft;
-
                 let offset = 0;
-                const speed = 0.5; // Slightly faster for smoother appearance
 
                 function animateMarquee() {
-                    offset += speed;
-
-                    // Reset when we reach the exact start of the second set
-                    if (offset >= loopWidth) {
-                        offset = 0;
-                    }
-
+                    offset += CONFIG.marqueeSpeed;
+                    if (offset >= loopWidth) offset = 0;
                     track.style.transform = `translateX(-${offset}px)`;
                     requestAnimationFrame(animateMarquee);
                 }
-
                 animateMarquee();
+
+                if (typeof Dither !== "undefined" && Dither.init) {
+                    Dither.init();
+                }
+            });
+
+            /* =========================================================
+   CHAT EXPAND / COLLAPSE
+   ========================================================= */
+            const container = document.getElementById("container");
+            const chatBlock = document.getElementById("chatBlock");
+            const joinChatBtn = document.getElementById("joinChatBtn");
+            const chatIframe = document.getElementById("chatIframe");
+
+            function expandChat() {
+                const origTop = chatBlock.offsetTop;
+                const origLeft = chatBlock.offsetLeft;
+                const origWidth = chatBlock.offsetWidth;
+                const origHeight = chatBlock.offsetHeight;
+
+                chatBlock.dataset.origTop = origTop;
+                chatBlock.dataset.origLeft = origLeft;
+                chatBlock.dataset.origWidth = origWidth;
+                chatBlock.dataset.origHeight = origHeight;
+
+                chatBlock.style.position = "absolute";
+                chatBlock.style.top = origTop + "px";
+                chatBlock.style.left = origLeft + "px";
+                chatBlock.style.width = origWidth + "px";
+                chatBlock.style.height = origHeight + "px";
+                chatBlock.style.zIndex = "100";
+
+                void chatBlock.offsetHeight;
+
+                chatBlock.style.top = "0px";
+                chatBlock.style.left = "0px";
+                chatBlock.style.width = container.offsetWidth + "px";
+                chatBlock.style.height = container.offsetHeight + "px";
+
+                chatBlock.classList.add("expanded");
+
+                // Start loading iframe in background immediately
+                chatIframe.src = CONFIG.chatUrl;
+
+                // Fade in iframe only after expand animation completes (500ms)
+                setTimeout(() => {
+                    chatIframe.classList.add("loaded");
+                }, 500);
+            }
+
+            function collapseChat() {
+                // Reset iframe so next open gets the fade-in again
+                chatIframe.classList.remove("loaded");
+
+                const origTop = parseInt(chatBlock.dataset.origTop);
+                const origLeft = parseInt(chatBlock.dataset.origLeft);
+                const origWidth = parseInt(chatBlock.dataset.origWidth);
+                const origHeight = parseInt(chatBlock.dataset.origHeight);
+
+                chatBlock.style.top = "0px";
+                chatBlock.style.left = "0px";
+                chatBlock.style.width = container.offsetWidth + "px";
+                chatBlock.style.height = container.offsetHeight + "px";
+
+                chatBlock.classList.remove("expanded");
+                void chatBlock.offsetHeight;
+
+                chatBlock.style.top = origTop + "px";
+                chatBlock.style.left = origLeft + "px";
+                chatBlock.style.width = origWidth + "px";
+                chatBlock.style.height = origHeight + "px";
+
+                setTimeout(() => {
+                    chatBlock.style.position = "";
+                    chatBlock.style.top = "";
+                    chatBlock.style.left = "";
+                    chatBlock.style.width = "";
+                    chatBlock.style.height = "";
+                    chatBlock.style.zIndex = "";
+                    chatIframe.src = "";
+                }, 500);
+            }
+
+            joinChatBtn.addEventListener("click", expandChat);
+
+            document.addEventListener("keydown", (e) => {
+                if (
+                    e.key === "Escape" &&
+                    chatBlock.classList.contains("expanded")
+                ) {
+                    collapseChat();
+                }
+            });
+
+            window.addEventListener("message", (e) => {
+                if (e.data && e.data.action === "close_chat") {
+                    collapseChat();
+                }
             });
         </script>
     </body>
